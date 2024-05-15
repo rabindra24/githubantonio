@@ -6,7 +6,7 @@ const ProductPage = async ({
 }: {
   params: { employeeId: string; storeId: string };
 }) => {
-  const employee = await prismadb.employees.findUnique({
+  var employee = await prismadb.employees.findUnique({
     where: {
       id: params.employeeId,
     },
@@ -33,9 +33,18 @@ const ProductPage = async ({
   //     },
   // })
 
-  //   if (!employee) {
-  //     return "Null";
-  //   }
+  if (!employee) {
+    employee = {
+      id: "",
+      name: "",
+      storeId: "",
+      salary: "",
+      address: "",
+      number: "",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+  }
 
   return (
     <div className="flex-col">
