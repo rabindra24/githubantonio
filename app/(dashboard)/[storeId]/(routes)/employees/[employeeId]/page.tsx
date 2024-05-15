@@ -33,9 +33,9 @@ const ProductPage = async ({
   //     },
   // })
 
-  if (!employee) {
-    return "Null";
-  }
+  //   if (!employee) {
+  //     return "Null";
+  //   }
 
   return (
     <div className="flex-col">
