@@ -245,9 +245,11 @@ export const OrderForm: React.FC<OrderFromProps> = ({
               <SelectContent>
                 <SelectGroup>
                   <SelectLabel>Select Product</SelectLabel>
-                  {product.map((item) => (
-                    <SelectItem value={item?.name}>{item?.name}</SelectItem>
-                  ))}
+                  {/* {product.map((item, idx) => (
+                    <SelectItem key={idx} value={item?.}>
+                      {item?.name}
+                    </SelectItem>
+                  ))} */}
                 </SelectGroup>
               </SelectContent>
             </Select>

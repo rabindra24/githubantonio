@@ -4,16 +4,19 @@ import { SizeClient } from "./components/client";
 import { SizeColumn } from "./components/columns";
 import { auth } from "@clerk/nextjs";
 import { getUserId } from "@/actions/get-user-id";
+import { redirect } from "next/navigation";
 
 const SizesPage = async ({ params }: { params: { storeId: string } }) => {
-  const data = auth();
+  const { userId } = auth();
 
-  const id = await getUserId(data?.userId);
+  if (!userId) {
+    redirect("/sign-in");
+  }
   const sizes = await prismadb.size.findMany({
     where: {
       storeId: params.storeId,
       store: {
-        shopId: id,
+        shopId: userId,
       },
     },
     orderBy: {

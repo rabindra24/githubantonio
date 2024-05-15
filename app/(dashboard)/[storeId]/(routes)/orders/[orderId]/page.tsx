@@ -36,6 +36,10 @@ const ProductPage = async ({
 
   //   console.log("eekjjkjkjk");
 
+  if (!orders) {
+    return <h1>Nothing Found</h1>;
+  }
+
   return (
     <div className="flex-col">
       <div className="flex-1 p-8 pt-6 space-y-4">

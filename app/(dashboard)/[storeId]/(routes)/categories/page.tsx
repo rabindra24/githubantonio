@@ -4,16 +4,19 @@ import { CategoryClient } from "./components/client";
 import { CategoryColumn } from "./components/columns";
 import { getUserId } from "@/actions/get-user-id";
 import { auth } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 
 const CategoriesPage = async ({ params }: { params: { storeId: string } }) => {
-  const data = auth();
+  const { userId } = auth();
 
-  const id = await getUserId(data?.userId);
+  if (!userId) {
+    redirect("/sign-in");
+  }
   const categories = await prismadb.category.findMany({
     where: {
       storeId: params.storeId,
       store: {
-        shopId: id,
+        shopId: userId,
       },
     },
     include: {

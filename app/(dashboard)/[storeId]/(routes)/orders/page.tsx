@@ -5,17 +5,20 @@ import { OrderColumn } from "./components/columns";
 import { formatter } from "@/lib/utils";
 import { auth } from "@clerk/nextjs";
 import { getUserId } from "@/actions/get-user-id";
+import { redirect } from "next/navigation";
 
 const OrdersPage = async ({ params }: { params: { storeId: string } }) => {
-  const data = auth();
+  const { userId } = auth();
 
-  const id = await getUserId(data?.userId);
+  if (!userId) {
+    redirect("/sign-in");
+  }
 
   const orders = await prismadb.order.findMany({
     where: {
       storeId: params.storeId,
       store: {
-        shopId: id,
+        shopId: userId,
       },
     },
     include: {

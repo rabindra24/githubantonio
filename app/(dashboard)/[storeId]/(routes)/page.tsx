@@ -11,6 +11,7 @@ import { formatter } from "@/lib/utils";
 import { CreditCard, DollarSign, Package } from "lucide-react";
 import { auth } from "@clerk/nextjs";
 import { getUserId } from "@/actions/get-user-id";
+import { redirect } from "next/navigation";
 
 interface DashboardPageProps {
   params: { storeId: string };
@@ -21,9 +22,11 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
   //   where: { shopId: params.storeId },
   // });
 
-  const data = auth();
-
-  const id = await getUserId(data?.userId);
+  const { userId } = auth();
+  if (!userId) {
+    redirect("/sign-in");
+  }
+  const id = userId;
 
   const totalRevenue = await getTotalRevenue(params.storeId, id);
   const salesCount = await getSalesCount(params.storeId, id);

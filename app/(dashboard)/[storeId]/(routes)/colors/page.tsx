@@ -4,17 +4,20 @@ import { ColorClient } from "./components/client";
 import { ColorColumn } from "./components/columns";
 import { auth } from "@clerk/nextjs";
 import { getUserId } from "@/actions/get-user-id";
+import { redirect } from "next/navigation";
 const ColorsPage = async ({ params }: { params: { storeId: string } }) => {
-  const data = auth();
+  const { userId } = auth();
 
-  const id = await getUserId(data?.userId);
-  console.log(id);
-  console.log(params.storeId);
+  if (!userId) {
+    redirect("/sign-in");
+  }
+  // console.log(id);
+  // console.log(params.storeId);
   const colors = await prismadb.color.findMany({
     where: {
       storeId: params.storeId,
       store: {
-        shopId: id,
+        shopId: userId,
       },
     },
     orderBy: {
