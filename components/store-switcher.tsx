@@ -96,32 +96,32 @@ export default function StoreSwitcher({
         <Command>
           <CommandList>
             {role === "ADMIN" && (
-            <>
-              {/* <CommandInput placeholder="Search Store..." /> */}
-              {/* <CommandEmpty>No store found.</CommandEmpty> */}
-              <CommandGroup heading="Stores">
-                {formattedItems.map((store, index) => (
-                  <Button
-                    key={index}
-                    onClick={() => onStoreSelect(store)}
-                    className="text-sm w-full"
-                    variant={"outline"}
-                  >
-                    <StoreIcon className="w-4 h-4 mr-2" />
-                    {store.label}
-                    <Check
-                      className={cn(
-                        "ml-auto h-4 w-4",
-                        currentStore?.value === store.value
-                          ? "opacity-100"
-                          : "opacity-0"
-                      )}
-                    />
-                  </Button>
-                ))}
-              </CommandGroup>{" "}
-            </>
-             )} 
+              <>
+                {/* <CommandInput placeholder="Search Store..." /> */}
+                {/* <CommandEmpty>No store found.</CommandEmpty> */}
+                <CommandGroup heading="Stores">
+                  {formattedItems.map((store, index) => (
+                    <Button
+                      key={index}
+                      onClick={() => onStoreSelect(store)}
+                      className="text-sm w-full"
+                      variant={"outline"}
+                    >
+                      <StoreIcon className="w-4 h-4 mr-2" />
+                      {store.label}
+                      <Check
+                        className={cn(
+                          "ml-auto h-4 w-4",
+                          currentStore?.value === store.value
+                            ? "opacity-100"
+                            : "opacity-0"
+                        )}
+                      />
+                    </Button>
+                  ))}
+                </CommandGroup>{" "}
+              </>
+            )}
           </CommandList>
           <CommandSeparator />
           {/* <CommandList>
@@ -138,7 +138,7 @@ export default function StoreSwitcher({
               </CommandItem>
             </CommandGroup>
           </CommandList> */}
-          <CommandList>
+          {/* <CommandList>
             {role === "ADMIN" && (
               <Button
                 onClick={() => {
@@ -151,7 +151,7 @@ export default function StoreSwitcher({
                 <Plus className="w-4 h-4" /> Add a Store
               </Button>
             )}
-          </CommandList>
+          </CommandList> */}
         </Command>
       </PopoverContent>
     </Popover>
