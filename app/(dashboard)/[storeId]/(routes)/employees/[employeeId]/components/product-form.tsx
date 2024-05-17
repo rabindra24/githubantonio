@@ -42,7 +42,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { getUserId } from "@/actions/get-user-id";
 
 interface ProductFromProps {
-  initialData: Employees;
+  initialData?: Employees;
   // initialData: Product & {
   //     images: Image[]
   // } | null;

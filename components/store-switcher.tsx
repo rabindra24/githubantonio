@@ -35,7 +35,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
+import { useAuth } from "@clerk/nextjs";
 type PopoverTriggerProps = React.ComponentPropsWithoutRef<
   typeof PopoverTrigger
 >;
@@ -50,6 +50,8 @@ export default function StoreSwitcher({
   const storeModal = useStoreModal();
   const params = useParams();
   const router = useRouter();
+  const { isLoaded, userId, sessionId, getToken } = useAuth();
+  // console.log(userId);
 
   const role = useRole();
 
@@ -62,6 +64,8 @@ export default function StoreSwitcher({
     (item) => item.value === params.storeId
   );
 
+  // console.log(currentStore);
+
   const [open, setOpen] = useState(false);
 
   const onStoreSelect = (store: { value: string; label: string }) => {
@@ -69,6 +73,8 @@ export default function StoreSwitcher({
     setOpen(true);
     router.push(`/${store.value}`);
   };
+
+  // console.log(role);
 
   return (
     <Popover>
@@ -89,33 +95,33 @@ export default function StoreSwitcher({
       <PopoverContent className="w-[200px] p-0">
         <Command>
           <CommandList>
-            {role === "ADMIN" && (
-              <>
-                <CommandInput placeholder="Search Store..." />
-                <CommandEmpty>No store found.</CommandEmpty>
-                <CommandGroup heading="Stores">
-                  {formattedItems.map((store, index) => (
-                    <Button
-                      key={index}
-                      onClick={() => onStoreSelect(store)}
-                      className="text-sm w-full"
-                      variant={"outline"}
-                    >
-                      <StoreIcon className="w-4 h-4 mr-2" />
-                      {store.label}
-                      <Check
-                        className={cn(
-                          "ml-auto h-4 w-4",
-                          currentStore?.value === store.value
-                            ? "opacity-100"
-                            : "opacity-0"
-                        )}
-                      />
-                    </Button>
-                  ))}
-                </CommandGroup>{" "}
-              </>
-            )}
+            {/* {role === "ADMIN" && ( */}
+            <>
+              <CommandInput placeholder="Search Store..." />
+              <CommandEmpty>No store found.</CommandEmpty>
+              <CommandGroup heading="Stores">
+                {formattedItems.map((store, index) => (
+                  <Button
+                    key={index}
+                    onClick={() => onStoreSelect(store)}
+                    className="text-sm w-full"
+                    variant={"outline"}
+                  >
+                    <StoreIcon className="w-4 h-4 mr-2" />
+                    {store.label}
+                    <Check
+                      className={cn(
+                        "ml-auto h-4 w-4",
+                        currentStore?.value === store.value
+                          ? "opacity-100"
+                          : "opacity-0"
+                      )}
+                    />
+                  </Button>
+                ))}
+              </CommandGroup>{" "}
+            </>
+            {/* )} */}
           </CommandList>
           <CommandSeparator />
           {/* <CommandList>

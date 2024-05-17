@@ -21,7 +21,7 @@ export default async function SetupLayout({ children }: DashboardType) {
   });
 
   if (store) {
-    redirect(`/${store.shopId}`); // Add shopId instead of Id to get particular shop data
+    redirect(`/${store.id}`); // Add shopId instead of Id to get particular shop data
   }
 
   return <>{children}</>;

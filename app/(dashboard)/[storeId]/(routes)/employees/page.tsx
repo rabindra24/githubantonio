@@ -10,6 +10,10 @@ import { redirect } from "next/navigation";
 const ProductsPage = async ({ params }: { params: { storeId: string } }) => {
   const { userId } = auth();
 
+  const data = auth();
+
+  const id = await getUserId(userId);
+
   if (!userId) {
     redirect("/sign-in");
   }
@@ -24,14 +28,14 @@ const ProductsPage = async ({ params }: { params: { storeId: string } }) => {
   //   redirect(`/${store.shopId}`); // Add shopId instead of Id to get particular shop data
   // }
 
-  // console.log(id);
-  // console.log(params?.storeId);
+  console.log(userId);
+  console.log(params?.storeId);
 
   const employees = await prismadb.employees.findMany({
     where: {
       storeId: params.storeId,
       store: {
-        shopId: userId,
+        userId: userId,
       },
     },
     include: {

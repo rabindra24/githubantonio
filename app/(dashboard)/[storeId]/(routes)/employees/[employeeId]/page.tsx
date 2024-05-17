@@ -33,18 +33,18 @@ const ProductPage = async ({
   //     },
   // })
 
-  if (!employee) {
-    employee = {
-      id: "",
-      name: "",
-      storeId: "",
-      salary: "",
-      address: "",
-      number: "",
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-  }
+  //   if (!employee) {
+  //     employee = {
+  //       id: "",
+  //       name: "",
+  //       storeId: "",
+  //       salary: "",
+  //       address: "",
+  //       number: "",
+  //       createdAt: new Date(),
+  //       updatedAt: new Date(),
+  //     };
+  //   }
 
   return (
     <div className="flex-col">

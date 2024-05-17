@@ -9,6 +9,9 @@ export const useRole = () => {
     return "ADMIN";
   }
 
+  console.log("session");
+  console.log(session);
+
   if (role === "org:member") {
     return "MEMBER";
   }
