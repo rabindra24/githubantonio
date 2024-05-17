@@ -12,7 +12,7 @@ const ProductsPage = async ({ params }: { params: { storeId: string } }) => {
 
   const data = auth();
 
-  const id = await getUserId(userId);
+  // const id = await getUserId(userId );
 
   if (!userId) {
     redirect("/sign-in");
