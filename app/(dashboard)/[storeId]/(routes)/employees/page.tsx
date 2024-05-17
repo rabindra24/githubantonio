@@ -6,6 +6,7 @@ import { formatter } from "@/lib/utils";
 import { auth } from "@clerk/nextjs";
 import { getUserId } from "@/actions/get-user-id";
 import { redirect } from "next/navigation";
+import { getUserShopId } from "@/actions/get-user-store-id";
 
 const ProductsPage = async ({ params }: { params: { storeId: string } }) => {
   const { userId } = auth();
@@ -18,25 +19,36 @@ const ProductsPage = async ({ params }: { params: { storeId: string } }) => {
     redirect("/sign-in");
   }
 
+  // console.log(userId);
+
   const store = await prismadb?.store?.findFirst({
     where: {
-      userId,
+      id: params.storeId,
     },
   });
+
+  // console.log(store);
 
   // if (store) {
   //   redirect(`/${store.shopId}`); // Add shopId instead of Id to get particular shop data
   // }
 
+  // console.log(userId);
+  // console.log(params?.storeId);
+
+  console.log(params.storeId);
   console.log(userId);
-  console.log(params?.storeId);
+
+  const getUserStore = await getUserShopId(params.storeId);
+
+  console.log(getUserStore);
 
   const employees = await prismadb.employees.findMany({
     where: {
       storeId: params.storeId,
-      store: {
-        userId: userId,
-      },
+      // store: {
+      //   userId: getUserStore,
+      // },
     },
     include: {
       store: true,
@@ -46,7 +58,7 @@ const ProductsPage = async ({ params }: { params: { storeId: string } }) => {
     },
   });
 
-  // console.log(products);
+  console.log(employees);
 
   const formattedProducts: ProductColumn[] = employees.map((item) => ({
     id: item.id,

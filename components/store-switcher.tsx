@@ -95,10 +95,10 @@ export default function StoreSwitcher({
       <PopoverContent className="w-[200px] p-0">
         <Command>
           <CommandList>
-            {/* {role === "ADMIN" && ( */}
+            {role === "ADMIN" && (
             <>
-              <CommandInput placeholder="Search Store..." />
-              <CommandEmpty>No store found.</CommandEmpty>
+              {/* <CommandInput placeholder="Search Store..." /> */}
+              {/* <CommandEmpty>No store found.</CommandEmpty> */}
               <CommandGroup heading="Stores">
                 {formattedItems.map((store, index) => (
                   <Button
@@ -121,7 +121,7 @@ export default function StoreSwitcher({
                 ))}
               </CommandGroup>{" "}
             </>
-            {/* )} */}
+             )} 
           </CommandList>
           <CommandSeparator />
           {/* <CommandList>

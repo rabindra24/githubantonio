@@ -1,13 +1,13 @@
 import prismadb from "@/lib/prismadb";
 
-export const getUserId = async (userId: string) => {
+export const getUserShopId = async (shopId: string) => {
     const user = await prismadb.store.findFirst({
         where: {
-           userId
+           shopId
         },
     });
 
     console.log(user)
 
-    return user?.id;
+    return user?.userId;
 }

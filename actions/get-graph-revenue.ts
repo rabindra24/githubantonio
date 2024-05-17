@@ -8,7 +8,7 @@ interface GraphData {
 export const getGraphRevenue = async (storeId: string, id: string) => {
   const paidOrders = await prismadb.order.findMany({
     where: {
-      storeId: id,
+      storeId,
       store: {
         shopId: storeId,
       },

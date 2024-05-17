@@ -28,6 +28,9 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
   }
   const id = userId;
 
+  const loginUserId = await getUserId(userId);
+  console.log(loginUserId)
+
   const totalRevenue = await getTotalRevenue(params.storeId, id);
   const salesCount = await getSalesCount(params.storeId, id);
   const stockCount = await getStockCount(params.storeId, id);

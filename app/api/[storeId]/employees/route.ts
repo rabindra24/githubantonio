@@ -31,12 +31,12 @@ export async function POST(
 
     const storeByUserId = await prismadb.store.findFirst({
       where: {
-        shopId: params.storeId,
-        userId,
+        id: params.storeId,
+        // userId,
       },
     });
 
-    console.log
+    // console.log
     console.log(storeByUserId);
 
     if (!storeByUserId) {
@@ -46,6 +46,8 @@ export async function POST(
     // if (!storeByUserId) {
     //   return new NextResponse("Unauthorized", { status: 403 });
     // }
+
+    console.log(params.storeId)
 
     const employee = await prismadb.employees.create({
       data: {
