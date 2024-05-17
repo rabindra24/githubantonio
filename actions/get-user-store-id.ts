@@ -7,7 +7,7 @@ export const getUserShopId = async (shopId: string) => {
         },
     });
 
-    console.log(user)
+    // console.log(user)
 
     return user?.userId;
 }

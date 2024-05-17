@@ -12,6 +12,10 @@ import { CreditCard, DollarSign, Package } from "lucide-react";
 import { auth } from "@clerk/nextjs";
 import { getUserId } from "@/actions/get-user-id";
 import { redirect } from "next/navigation";
+import { getWeekGraphRevenue } from "@/actions/get-week-graph-revenue";
+import { getTotalYearGraphRevenue } from "@/actions/get-total-year-graph-revenue";
+import RevenueChart from "@/components/RevenueChart";
+import GraphGroup from "@/components/GraphGroup";
 
 interface DashboardPageProps {
   params: { storeId: string };
@@ -29,12 +33,16 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
   const id = userId;
 
   const loginUserId = await getUserId(userId);
-  console.log(loginUserId)
+  // console.log(loginUserId);
 
   const totalRevenue = await getTotalRevenue(params.storeId, id);
   const salesCount = await getSalesCount(params.storeId, id);
   const stockCount = await getStockCount(params.storeId, id);
   const graphRevenue = await getGraphRevenue(params.storeId, id);
+  const graphWeekRevenue = await getWeekGraphRevenue(params.storeId);
+  const graphTotalYearRevenue = await getTotalYearGraphRevenue(params.storeId);
+
+  // console.log(graphTotalYearRevenue)
 
   return (
     <div className="flex-col">
@@ -76,14 +84,18 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
             </CardContent>
           </Card>
         </div>
-        <Card className="col-span-4">
+        {/* <Card className="col-span-4">
           <CardHeader>
             <CardTitle>Overview</CardTitle>
           </CardHeader>
           <CardContent className="pl-2">
             <Overview data={graphRevenue} />
           </CardContent>
-        </Card>
+        </Card> */}
+        {/* <Overview data={graphTotalYearRevenue} /> */}
+        {/* <Overview data={graphWeekRevenue} />
+        <RevenueChart data={graphTotalYearRevenue}/> */}
+        <GraphGroup graphTotalYearRevenue={graphTotalYearRevenue} graphWeekRevenue={graphWeekRevenue} graphRevenue={graphRevenue}/>
       </div>
     </div>
   );

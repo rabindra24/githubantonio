@@ -36,6 +36,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useAuth } from "@clerk/nextjs";
+import { useClerk } from '@clerk/nextjs';
+
 type PopoverTriggerProps = React.ComponentPropsWithoutRef<
   typeof PopoverTrigger
 >;
@@ -52,6 +54,7 @@ export default function StoreSwitcher({
   const router = useRouter();
   const { isLoaded, userId, sessionId, getToken } = useAuth();
   // console.log(userId);
+  const { signOut } = useClerk();
 
   const role = useRole();
 
@@ -69,12 +72,13 @@ export default function StoreSwitcher({
   const [open, setOpen] = useState(false);
 
   const onStoreSelect = (store: { value: string; label: string }) => {
-    console.log(store);
+    // console.log(store);
     setOpen(true);
     router.push(`/${store.value}`);
   };
 
   // console.log(role);
+
 
   return (
     <Popover>
@@ -138,20 +142,21 @@ export default function StoreSwitcher({
               </CommandItem>
             </CommandGroup>
           </CommandList> */}
-          {/* <CommandList>
+          <CommandList>
             {role === "ADMIN" && (
               <Button
                 onClick={() => {
-                  setOpen(false);
-                  alert("jjj");
-                  storeModal.onOpen();
+                  // setOpen(false);
+                  // alert("jjj");
+                  // storeModal.onOpen();
+                  signOut();
                 }}
                 className="w-full bg-transparent text-white hover:bg-transparent hover:text-gray-300"
               >
                 <Plus className="w-4 h-4" /> Add a Store
               </Button>
             )}
-          </CommandList> */}
+          </CommandList>
         </Command>
       </PopoverContent>
     </Popover>
