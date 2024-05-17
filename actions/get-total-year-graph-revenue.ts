@@ -2,7 +2,7 @@ import prismadb from "@/lib/prismadb";
 import { subYears } from "date-fns";
 
 interface RevenueData {
-  year: string;
+  year: any;
   [month: string]: number;
 }
 
@@ -45,7 +45,7 @@ export const getTotalYearGraphRevenue = async (storeId: string): Promise<Revenue
       }
     }
 
-    const formattedData: RevenueData = {
+    const formattedData: any = {
       year: year.toString(),
       Jan: monthlyRevenue[0] || 0,
       Feb: monthlyRevenue[1] || 0,
