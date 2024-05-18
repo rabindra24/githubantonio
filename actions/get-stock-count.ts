@@ -13,3 +13,9 @@ export const getStockCount = async (storeId: string, id: string) => {
 
   return salesCount;
 };
+
+export const getStockCountForAllStore = async (storeId: string, id: string) => {
+  const salesCount = await prismadb.product.count({});
+
+  return salesCount;
+};

@@ -13,3 +13,15 @@ export const getSalesCount = async (storeId: string, id: string) => {
 
   return salesCount;
 };
+
+
+export const getSalesCountForAllStore = async (storeId: string, id: string) => {
+  const salesCount = await prismadb.order.count({
+    where: {
+      isPaid: true,
+    },
+  });
+
+  return salesCount;
+};
+
